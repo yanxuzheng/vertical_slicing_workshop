@@ -7,7 +7,12 @@ class OrderCalculator:
 
     def get_price(self):
         """Get price for Order."""
-        return self.price * self.quantity
+        return round(self.price * self.quantity * (1 + self.get_tax_rate()), 2)
+
+    def get_tax_rate(self):
+        # tax rate for CA
+        return 0.0825
+
 
 def main():
     parser = argparse.ArgumentParser()
