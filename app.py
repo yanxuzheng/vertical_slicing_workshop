@@ -6,7 +6,10 @@ class OrderCalculator:
         self.state = state
         self.tax_rates = {
             "CA": 0.0825,
-            "TX": 0.0625
+            "TX": 0.0625,
+            "UT": 0.0685,
+            "NV": 0.08,
+            "AL": 0.04,
         }
 
 
