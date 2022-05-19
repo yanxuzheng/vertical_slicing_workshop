@@ -1,8 +1,13 @@
 import argparse
 class OrderCalculator:
-    def __init__(self, quantity, price):
+    def __init__(self, quantity, price, state):
         self.quantity = quantity
         self.price = price
+        self.state = state
+        self.tax_rates = {
+            "CA": 0.0825,
+            "TX": 0.0625
+        }
 
 
     def get_price(self):
@@ -10,16 +15,17 @@ class OrderCalculator:
         return round(self.price * self.quantity * (1 + self.get_tax_rate()), 2)
 
     def get_tax_rate(self):
-        # tax rate for CA
-        return 0.0825
+        return self.tax_rates[self.state]
+
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-q', '--quantity', type=int)
     parser.add_argument('-p', '--price', type=int)
+    parser.add_argument('-s', '--state', type=str)
     args = parser.parse_args()
-    calculator = OrderCalculator(quantity=args.quantity, price=args.price)
+    calculator = OrderCalculator(quantity=args.quantity, price=args.price, state=args.state)
     order_value = calculator.get_price()
     print(order_value)
 
